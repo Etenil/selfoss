@@ -86,7 +86,7 @@ class ContentLoader {
         $lasticon = false;
         foreach ($spout as $item) {
             // item already in database?
-            if($itemsDao->exists($item->getId())===true)
+            if($itemsDao->exists($item->getId(), $item->getLind())===true)
                 continue;
             
             // test date: continue with next if item too old

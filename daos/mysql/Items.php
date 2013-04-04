@@ -136,9 +136,14 @@ class Items extends Database {
      * @return bool
      * @param string $uid
      */
-    public function exists($uid) {
-        $res = \F3::get('db')->exec('SELECT COUNT(*) AS amount FROM items WHERE uid=:uid',
-                    array(':uid' => $uid));
+    public function exists($uid, $link = false) {
+        if($link) {
+            $res = \F3::get('db')->exec('SELECT COUNT(*) AS amount FROM items WHERE uid=:uid OR link=:link',
+                   array(':uid' => $uid, ':link' => $link));
+        } else {
+            $res = \F3::get('db')->exec('SELECT COUNT(*) AS amount FROM items WHERE uid=:uid',
+                   array(':uid' => $uid));
+        }
         return $res[0]['amount']>0;
     }
     
